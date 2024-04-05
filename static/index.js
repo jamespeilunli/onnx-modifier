@@ -362,6 +362,13 @@ host.BrowserHost = class {
                 openFileDialog.click();
             });
         }
+
+        const makeCustomOperator = this.document.getElementById('make-custom-operator');
+        makeCustomOperator.addEventListener('click', () => {
+            new sidebar.CustomOperatorSidebar();
+            console.log(sidebar);
+        })
+
         const githubButton = this.document.getElementById('github-button');
         const githubLink = this.document.getElementById('logo-github');
         if (githubButton && githubLink) {

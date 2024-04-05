@@ -545,6 +545,12 @@ sidebar.NodeSidebar = class {
     }
 };
 
+sidebar.CustomOperatorSidebar = class {
+    constructor() {
+        console.log("Hello world");
+    }
+}
+
 sidebar.NameValueView = class {
 
     constructor(host, name, value) {
