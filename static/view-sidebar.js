@@ -547,7 +547,12 @@ sidebar.NodeSidebar = class {
 
 sidebar.CustomOperatorSidebar = class {
     constructor() {
+        this._elements = [];
         console.log("Hello world");
+    }
+
+    render() {
+        return this._elements;
     }
 }
 
