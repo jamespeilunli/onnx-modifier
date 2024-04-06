@@ -365,7 +365,7 @@ host.BrowserHost = class {
 
         const makeCustomOperatorSidebar = this.document.getElementById('make-custom-operator');
         makeCustomOperatorSidebar.addEventListener('click', () => {
-            const customOperatorSidebar = new sidebar.CustomOperatorSidebar();
+            const customOperatorSidebar = new sidebar.CustomOperatorSidebar(this);
             console.log(sidebar);
             this._view._sidebar.open(customOperatorSidebar.render(), 'Custom Operator'); // bad practice change later
         })

@@ -443,6 +443,7 @@ sidebar.NodeSidebar = class {
     _raise(event, data) {
         if (this._events && this._events[event]) {
             for (const callback of this._events[event]) {
+                console.log(`raised event ${event} data ${data}`)
                 callback(this, data);
             }
         }
@@ -546,14 +547,61 @@ sidebar.NodeSidebar = class {
 };
 
 sidebar.CustomOperatorSidebar = class {
-    constructor() {
+    constructor(host) {
+        this._host = host;
         this._elements = [];
-        console.log("Hello world");
+
+        this._addEditableProperty('type');
+        this._addHeader('Attributes');
+        this._addProperty('addProperty test', new sidebar.ValueTextView(this._host, "foo"));
+        this._addHeader('Inputs');
+        this._addHeader('Outputs');
     }
 
     render() {
         return this._elements;
     }
+
+    _addHeader(title) {
+        const headerElement = this._host.document.createElement('div');
+        headerElement.className = 'sidebar-view-header';
+        headerElement.innerText = title;
+        this._elements.push(headerElement);
+    }
+
+    _addProperty(name, value) {
+        const item = new sidebar.NameValueView(this._host, name, value);
+        this._elements.push(item.render());
+    }
+
+    _addEditableProperty(name) {
+        const valueElement = this._host.document.createElement('div');
+        valueElement.className = 'sidebar-view-item-value'
+        const inputElement = this._host.document.createElement('input');
+        inputElement.setAttribute('type', 'text');
+        inputElement.setAttribute('value', '');
+        inputElement.setAttribute('title', '');
+        inputElement.setAttribute('size', '42');
+        valueElement.appendChild(inputElement);
+
+        this._elements.push((new sidebar.NameValueView(this._host, name, {render() {return [valueElement];}})).render());
+    }
+
+    /*
+    _addButton(title) {
+        const buttonElement = this._host.document.createElement('button');
+        buttonElement.className = 'sidebar-view-button';
+        buttonElement.innerText = title;
+        this._elements.push(buttonElement);
+
+        if (title === 'Create') {
+            buttonElement.addEventListener('click', () => {
+                // put this code somewhere else later?
+
+            });
+        }
+    }
+    */
 }
 
 sidebar.NameValueView = class {
