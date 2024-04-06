@@ -362,6 +362,14 @@ host.BrowserHost = class {
                 openFileDialog.click();
             });
         }
+
+        const makeCustomOperatorSidebar = this.document.getElementById('make-custom-operator');
+        makeCustomOperatorSidebar.addEventListener('click', () => {
+            const customOperatorSidebar = new sidebar.CustomOperatorSidebar(this);
+            console.log(sidebar);
+            this._view._sidebar.open(customOperatorSidebar.render(), 'Custom Operator'); // bad practice change later
+        })
+
         const githubButton = this.document.getElementById('github-button');
         const githubLink = this.document.getElementById('logo-github');
         if (githubButton && githubLink) {
